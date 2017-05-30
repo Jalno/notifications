@@ -1,0 +1,41 @@
+{
+	"files":[
+		{
+			"classes":["notifiable"],
+			"file":"libraries/notifiable.php"
+		},
+		{
+			"classes":["events"],
+			"file":"libraries/event/events.php"
+		},
+		{
+			"classes":["channel"],
+			"file":"libraries/channel.php"
+		},
+		{
+			"classes":["events\\channels"],
+			"file":"libraries/event/channels.php"
+		},
+		{
+			"classes":["api"],
+			"file":"api.php"
+		},
+		{
+			"classes":["listeners\\base"],
+			"file":"listeners/base.php"
+		},
+		{
+			"classes":["listeners\\events"],
+			"file":"listeners/events.php"
+		},
+		{
+			"classes":["listeners\\sms"],
+			"file":"listeners/sms.php"
+		},
+		{
+			"classes":["listeners\\email"],
+			"file":"listeners/email.php"
+		}
+		
+	]
+}
