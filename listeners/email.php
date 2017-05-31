@@ -1,5 +1,6 @@
 <?php
 namespace packages\notifications\listeners;
+use \packages\userpanel\user;
 use \packages\email\events\templates;
 use \packages\email\template;
 use \packages\notifications\api;
@@ -12,6 +13,7 @@ class email{
 				foreach($event::getParameters() as $variable){
 					$template->addVariable($variable);
 				}
+				$template->addVariable(user::class);
 				$templates->addTemplate($template);
 			}
 		}
