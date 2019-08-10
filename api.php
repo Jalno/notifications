@@ -9,6 +9,7 @@ class api{
 	private static $channelsTriggered = false;
 	public static function addEvent(string $event){
 		$log = log::getInstance();
+		$event = strtolower($event);
 		if(!class_exists($event) ){
 			throw new \Exception($event." does not exists");
 		}
@@ -41,7 +42,7 @@ class api{
 		return self::$channels;
 	}
 	public static function notify(event $event){
-		if(in_array(get_class($event), self::getEvents())){
+		if(in_array(strtolower(get_class($event)), self::getEvents())){
 			$channels = self::getChannels();
 			foreach($channels as $channel){
 				$channel->notify($event);
