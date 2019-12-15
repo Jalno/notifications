@@ -1,6 +1,7 @@
 <?php
 namespace packages\notifications;
-use \packages\base\event;
-abstract class channel{
-	abstract public function notify(event $e);
+use packages\base\Event;
+abstract class Channel {
+	abstract public function notify(Event $e);
+	abstract public function getName(): string;
 }
