@@ -41,12 +41,26 @@ class api{
 		}
 		return self::$channels;
 	}
-	public static function notify(event $event){
-		if(in_array(strtolower(get_class($event)), self::getEvents())){
+	public static function notify(Event $event) {
+		$log = Log::getInstance();
+		$name = strtolower(get_class($event));
+		$log->info("packages/notifications/API@notify event:", $name);
+		$log->debug("check event is exists in getEvents() array?");
+		if (in_array($name, self::getEvents())) {
+			$log->reply("is exists, get channels...");
 			$channels = self::getChannels();
-			foreach($channels as $channel){
-				$channel->notify($event);
+			$log->debug(count($channels), "channel founded");
+			foreach ($channels as $channel) {
+				$log->debug("send notify on channel:", $channel->getName());
+				try {
+					$channel->notify($event);
+					$log->reply("done");
+				} catch (\Throwable $e) {
+					$log->reply()->error("an error accured:", $e->getMessage());
+				}
 			}
+		} else {
+			$log->reply("not exists");
 		}
 	}
 }
