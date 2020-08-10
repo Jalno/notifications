@@ -55,7 +55,7 @@ class api{
 				try {
 					$channel->notify($event);
 					$log->reply("done");
-				} catch (\Throwable $e) {
+				} catch (\Exception $e) {
 					$log->reply()->error("an error accured:", $e->getMessage());
 				}
 			}
