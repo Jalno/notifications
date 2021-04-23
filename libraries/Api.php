@@ -80,14 +80,33 @@ class Api {
 	 * @param IChannel[]|null $channels
 	 */
 	public static function notify(EventInterface $event, ?array $channels = null): void {
-		if (in_array(strtolower(get_class($event)), self::getEvents())) {
-			if ($channels === null) {
-				$channels = self::getChannels();
+		$log = Log::getInstance();
+		$name = strtolower(get_class($event));
+		$log->info("notify event: ", $name);
+		$log->debug("check event is exists in getEvents() array?");
+		if (!in_array($name, self::getEvents())) {
+			$log->reply("not exists");
+			return;
+		}
+		if ($channels === null) {
+			$log->reply("is exists, get channels...");
+			$channels = self::getChannels();
+		} else {
+			$log->reply("is exists, use passed channels...");
+		}
+		foreach ($channels as $channel) {
+			$log->debug("Check for channel that can notify this event:", $channel->getName());
+			if (!$channel->canNotify($event)) {
+				$log->reply("Can't, skiped");
+				continue;
 			}
-			foreach ($channels as $channel) {
-				if ($channel->canNotify($event)) {
-					$channel->notify($event);
-				}
+			$log->reply("It can, notifying");
+	
+			try {
+				$channel->notify($event);
+				$log->reply("done");
+			} catch (\Exception $e) {
+				$log->reply()->error("an exception occured:", $e->__toString());
 			}
 		}
 	}
