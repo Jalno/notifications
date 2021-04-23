@@ -1,18 +1,11 @@
 {
-	"permissions": "*",
-	"autoload":"autoloader.json",
+	"autoload": {
+		"directories": ["libraries", "listeners"]
+	},
 	"events": [
 		{
-			"name":"\\packages\\base\\events\\PackagesLoaded",
-			"listener": "listeners\\base@packagesLoaded"
-		},
-		{
-			"name":"\\packages\\sms\\events\\templates",
-			"listener": "listeners\\sms@templates"
-		},
-		{
-			"name":"\\packages\\email\\events\\templates",
-			"listener": "listeners\\email@templates"
+			"name":"packages/base/events/PackagesLoaded",
+			"listener": "listeners/Base@packagesLoaded"
 		}
 	]
 }

@@ -1,9 +1,11 @@
 <?php
 namespace packages\notifications\listeners;
-use \packages\base\event;
-use \packages\notifications\api;
-class events{
-	public function handle(event $e){
-		api::notify($e);
+
+use packages\base\EventInterface;
+use packages\notifications\Api;
+
+class Events{
+	public function handle(EventInterface $e): void {
+		Api::notify($e);
 	}
 }
