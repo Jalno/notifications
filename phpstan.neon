@@ -1,7 +1,7 @@
 parameters:
-  level: 8
+  level: max
+  paths:
+    - libraries
+    - listeners
   scanDirectories:
-    - ../base
-    - ../userpanel
-  ignoreErrors:
-    - "/(Class|Interface|Trait) .+ referenced with incorrect case/"
+    - vendor/jalno/base
